@@ -1,221 +1,258 @@
-import React, { useState, useRef } from 'react';
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我說出 我腦海中的戶外教育</title>
+    <!-- 引入 Tailwind CSS 以快速設定樣式 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 隱藏預設的捲軸，讓畫面更乾淨 */
+        body { font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif; }
+        .selected-ring-green { box-shadow: 0 0 0 4px #22c55e; transform: scale(1.05); }
+        .selected-ring-pink { box-shadow: 0 0 0 4px #ec4899; transform: scale(1.05); }
+    </style>
+</head>
+<body class="min-h-screen bg-[#F0FDFA] p-4 md:p-8 flex items-center justify-center">
 
-const OutdoorEducationSpeech = () => {
-  const [photo, setPhoto] = useState(null);
-  const [sight, setSight] = useState(null);
-  const [feeling, setFeeling] = useState(null);
-  const fileInputRef = useRef(null);
-
-  // 選項資料字典 (保留美術館的元素，因為這是你們這次去的地點)
-  const sights = [
-    { id: 'painting', text: '一幅美麗的畫', emoji: '🖼️', color: 'bg-blue-100 hover:bg-blue-200 border-blue-300' },
-    { id: 'sculpture', text: '酷酷的雕塑', emoji: '🗿', color: 'bg-green-100 hover:bg-green-200 border-green-300' },
-    { id: 'building', text: '高高的建築物', emoji: '🏛️', color: 'bg-purple-100 hover:bg-purple-200 border-purple-300' },
-    { id: 'people', text: '好多人', emoji: '🧑‍🤝‍🧑', color: 'bg-orange-100 hover:bg-orange-200 border-orange-300' },
-  ];
-
-  const feelings = [
-    { id: 'happy', text: '很開心', emoji: '😊', color: 'bg-yellow-100 hover:bg-yellow-200 border-yellow-300' },
-    { id: 'surprised', text: '很驚訝', emoji: '😲', color: 'bg-indigo-100 hover:bg-indigo-200 border-indigo-300' },
-    { id: 'fun', text: '很好玩', emoji: '🥳', color: 'bg-pink-100 hover:bg-pink-200 border-pink-300' },
-    { id: 'tired', text: '累累的', emoji: '🥱', color: 'bg-gray-100 hover:bg-gray-200 border-gray-300' },
-  ];
-
-  // 處理照片上傳
-  const handlePhotoUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhoto(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // 觸發隱藏的檔案選擇器
-  const triggerFileInput = () => {
-    fileInputRef.current.click();
-  };
-
-  // 重置功能
-  const handleReset = () => {
-    setPhoto(null);
-    setSight(null);
-    setFeeling(null);
-  };
-
-  // 文字轉語音功能 (Text-to-Speech)
-  const handleSpeak = () => {
-    let sentence = '';
-    
-    if (!photo && !sight && !feeling) {
-      sentence = '請先選一張照片，然後告訴我你看到了什麼！';
-    } else {
-      // 配合新標題，更改了句子的開頭
-      sentence = '這次的戶外教育，';
-      if (sight) {
-        sentence += `我看到了${sight.text}，`;
-      }
-      if (feeling) {
-        sentence += `我覺得${feeling.text}。`;
-      }
-      if (!sight && !feeling) {
-        sentence += '這是我拍的照片。';
-      }
-    }
-
-    // 檢查瀏覽器是否支援語音
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel(); // 中斷前一次的語音
-      
-      const utterance = new SpeechSynthesisUtterance(sentence);
-      utterance.lang = 'zh-TW'; 
-      utterance.rate = 0.85;    // 放慢語速，適合一年級特殊生
-      utterance.pitch = 1.2;    // 提高音調更親切
-      
-      window.speechSynthesis.speak(utterance);
-    } else {
-      alert('您的瀏覽器不支援語音功能喔！');
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-[#F0FDFA] p-4 md:p-8 font-sans flex items-center justify-center">
-      <div className="max-w-4xl w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-teal-400">
+    <div class="max-w-4xl w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-teal-400">
         
-        {/* 頂部標題 - 改為充滿戶外感的綠色系 */}
-        <header className="bg-teal-300 text-center py-6 px-4 relative flex flex-col items-center justify-center min-h-[100px]">
-          <h1 className="text-3xl md:text-4xl font-bold text-teal-900 tracking-wider">
-            🗣️ 我說出 我腦海中的戶外教育 🌳
-          </h1>
-          <button 
-            onClick={handleReset}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-teal-800 px-4 py-2 rounded-full font-bold shadow-sm hover:bg-teal-50 transition border-2 border-teal-400 hidden md:block"
-          >
-            重新開始 🔄
-          </button>
+        <!-- 頂部標題 -->
+        <header class="bg-teal-300 text-center py-6 px-4 relative flex flex-col items-center justify-center min-h-[100px]">
+            <h1 class="text-3xl md:text-4xl font-bold text-teal-900 tracking-wider">
+                🗣️ 我說出 我腦海中的戶外教育 🌳
+            </h1>
+            <button id="btn-reset-desktop" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-teal-800 px-4 py-2 rounded-full font-bold shadow-sm hover:bg-teal-50 transition border-2 border-teal-400 hidden md:block">
+                重新開始 🔄
+            </button>
         </header>
 
-        <div className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          {/* 左側：照片區 */}
-          <div className="flex flex-col gap-4">
-            <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-              <span className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center">1</span>
-              選一張照片吧！
-            </h2>
+        <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <div 
-              onClick={triggerFileInput}
-              className={`border-4 border-dashed rounded-3xl h-64 md:h-80 flex flex-col items-center justify-center cursor-pointer transition-all ${
-                photo ? 'border-transparent bg-gray-50' : 'border-blue-300 bg-blue-50 hover:bg-blue-100'
-              }`}
-            >
-              {photo ? (
-                <img src={photo} alt="學生選擇的照片" className="w-full h-full object-contain rounded-2xl" />
-              ) : (
-                <>
-                  <span className="text-6xl mb-4">📸</span>
-                  <p className="text-xl font-bold text-blue-600">點我放照片</p>
-                </>
-              )}
+            <!-- 左側：照片區 -->
+            <div class="flex flex-col gap-4">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center">1</span>
+                    選一張照片吧！
+                </h2>
+                
+                <input type="file" id="photo-upload" accept="image/*" class="hidden" />
+                
+                <div id="photo-container" class="border-4 border-dashed border-blue-300 bg-blue-50 hover:bg-blue-100 rounded-3xl h-64 md:h-80 flex flex-col items-center justify-center cursor-pointer transition-all relative overflow-hidden">
+                    <div id="photo-placeholder" class="flex flex-col items-center">
+                        <span class="text-6xl mb-4">📸</span>
+                        <p class="text-xl font-bold text-blue-600">點我放照片</p>
+                    </div>
+                    <img id="photo-preview" src="" alt="預覽照片" class="absolute inset-0 w-full h-full object-contain bg-gray-50 hidden" />
+                </div>
+
+                <button id="btn-reset-mobile" class="md:hidden mt-2 bg-gray-100 text-gray-700 px-4 py-3 rounded-xl font-bold border-2 border-gray-200">
+                    🔄 換一張 / 重新開始
+                </button>
             </div>
-            <input 
-              type="file" 
-              accept="image/*" 
-              className="hidden" 
-              ref={fileInputRef}
-              onChange={handlePhotoUpload}
-            />
-            {/* 手機版顯示的重新開始按鈕 */}
-            <button 
-              onClick={handleReset}
-              className="md:hidden mt-2 bg-gray-100 text-gray-700 px-4 py-3 rounded-xl font-bold border-2 border-gray-200"
-            >
-              🔄 換一張 / 重新開始
+
+            <!-- 右側：選擇與表達區 -->
+            <div class="flex flex-col gap-8">
+                
+                <!-- 看到什麼 -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center">2</span>
+                        我看到什麼？ 👀
+                    </h2>
+                    <div class="grid grid-cols-2 gap-3" id="sight-options">
+                        <button data-type="sight" data-text="一幅美麗的畫" class="option-btn bg-blue-100 hover:bg-blue-200 border-blue-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                            <span class="text-4xl">🖼️</span><span class="text-lg font-bold text-gray-700">一幅美麗的畫</span>
+                        </button>
+                        <button data-type="sight" data-text="酷酷的雕塑" class="option-btn bg-green-100 hover:bg-green-200 border-green-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                            <span class="text-4xl">🗿</span><span class="text-lg font-bold text-gray-700">酷酷的雕塑</span>
+                        </button>
+                        <button data-type="sight" data-text="高高的建築物" class="option-btn bg-purple-100 hover:bg-purple-200 border-purple-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                            <span class="text-4xl">🏛️</span><span class="text-lg font-bold text-gray-700">高高的建築物</span>
+                        </button>
+                        <button data-type="sight" data-text="好多人" class="option-btn bg-orange-100 hover:bg-orange-200 border-orange-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                            <span class="text-4xl">🧑‍🤝‍🧑</span><span class="text-lg font-bold text-gray-700">好多人</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 感覺怎麼樣 -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <span class="bg-pink-500 text-white rounded-full w-8 h-8 flex items-center justify-center">3</span>
+                        我覺得怎麼樣？ ❤️
+                    </h2>
+                    <div class="grid grid-cols-2 gap-3" id="feeling-options">
+                        <button data-type="feeling" data-text="很開心" class="option-btn bg-yellow-100 hover:bg-yellow-200 border-yellow-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                            <span class="text-4xl">😊</span><span class="text-lg font-bold text-gray-700">很開心</span>
+                        </button>
+                        <button data-type="feeling" data-text="很驚訝" class="option-btn bg-indigo-100 hover:bg-indigo-200 border-indigo-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                            <span class="text-4xl">😲</span><span class="text-lg font-bold text-gray-700">很驚訝</span>
+                        </button>
+                        <button data-type="feeling" data-text="很好玩" class="option-btn bg-pink-100 hover:bg-pink-200 border-pink-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                            <span class="text-4xl">🥳</span><span class="text-lg font-bold text-gray-700">很好玩</span>
+                        </button>
+                        <button data-type="feeling" data-text="累累的" class="option-btn bg-gray-100 hover:bg-gray-200 border-gray-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                            <span class="text-4xl">🥱</span><span class="text-lg font-bold text-gray-700">累累的</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 底部：唸出來區塊 -->
+        <div class="bg-teal-50 p-6 border-t-4 border-teal-200 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex-1 text-center md:text-left bg-white p-4 rounded-2xl border-2 border-teal-100 shadow-inner min-h-[5rem] flex items-center w-full">
+                <p id="sentence-display" class="text-2xl font-bold text-gray-800 w-full">
+                    <span class="text-gray-400">請選圖案，我就會幫你把句子變出來喔！✨</span>
+                </p>
+            </div>
+            
+            <button id="btn-speak" class="bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-full font-bold text-2xl shadow-lg transform hover:scale-105 transition-all flex items-center gap-3 whitespace-nowrap border-b-4 border-teal-700 active:border-b-0 active:mt-4 w-full md:w-auto justify-center">
+                <span>📢</span> 唸出來
             </button>
-          </div>
-
-          {/* 右側：選擇與表達區 */}
-          <div className="flex flex-col gap-8">
-            
-            {/* 看到什麼 */}
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center">2</span>
-                我看到什麼？ 👀
-              </h2>
-              <div className="grid grid-cols-2 gap-3">
-                {sights.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setSight(item)}
-                    className={`p-4 rounded-2xl border-4 transition-all transform hover:scale-105 flex flex-col items-center justify-center gap-2 ${
-                      sight?.id === item.id ? 'ring-4 ring-green-500 scale-105 ' + item.color : item.color
-                    }`}
-                  >
-                    <span className="text-4xl">{item.emoji}</span>
-                    <span className="text-lg font-bold text-gray-700">{item.text}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 感覺怎麼樣 */}
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="bg-pink-500 text-white rounded-full w-8 h-8 flex items-center justify-center">3</span>
-                我覺得怎麼樣？ ❤️
-              </h2>
-              <div className="grid grid-cols-2 gap-3">
-                {feelings.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setFeeling(item)}
-                    className={`p-4 rounded-2xl border-4 transition-all transform hover:scale-105 flex flex-col items-center justify-center gap-2 ${
-                      feeling?.id === item.id ? 'ring-4 ring-pink-500 scale-105 ' + item.color : item.color
-                    }`}
-                  >
-                    <span className="text-4xl">{item.emoji}</span>
-                    <span className="text-lg font-bold text-gray-700">{item.text}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-          </div>
         </div>
 
-        {/* 底部：唸出來區塊 */}
-        <div className="bg-teal-50 p-6 border-t-4 border-teal-200 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex-1 text-center md:text-left bg-white p-4 rounded-2xl border-2 border-teal-100 shadow-inner min-h-[5rem] flex items-center w-full">
-            <p className="text-2xl font-bold text-gray-800 w-full">
-              {(!sight && !feeling) ? (
-                <span className="text-gray-400">請選圖案，我就會幫你把句子變出來喔！✨</span>
-              ) : (
-                <>
-                  這次的戶外教育，
-                  {sight && <span className="text-green-600 underline decoration-wavy decoration-green-300">我看到了{sight.text}</span>}
-                  {sight && feeling && '，'}
-                  {feeling && <span className="text-pink-600 underline decoration-wavy decoration-pink-300">我覺得{feeling.text}</span>}
-                  。
-                </>
-              )}
-            </p>
-          </div>
-          
-          <button 
-            onClick={handleSpeak}
-            className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-full font-bold text-2xl shadow-lg transform hover:scale-105 transition-all flex items-center gap-3 whitespace-nowrap border-b-4 border-teal-700 active:border-b-0 active:mt-4 w-full md:w-auto justify-center"
-          >
-            <span>📢</span> 唸出來
-          </button>
-        </div>
-
-      </div>
     </div>
-  );
-};
 
-export default OutdoorEducationSpeech;
+    <!-- 邏輯控制 JavaScript -->
+    <script>
+        // 狀態變數
+        let state = {
+            photoLoaded: false,
+            sight: null,
+            feeling: null
+        };
+
+        // DOM 元素
+        const elements = {
+            photoUpload: document.getElementById('photo-upload'),
+            photoContainer: document.getElementById('photo-container'),
+            photoPlaceholder: document.getElementById('photo-placeholder'),
+            photoPreview: document.getElementById('photo-preview'),
+            sentenceDisplay: document.getElementById('sentence-display'),
+            btnSpeak: document.getElementById('btn-speak'),
+            btnResetDesktop: document.getElementById('btn-reset-desktop'),
+            btnResetMobile: document.getElementById('btn-reset-mobile'),
+            optionBtns: document.querySelectorAll('.option-btn')
+        };
+
+        // 照片上傳邏輯
+        elements.photoContainer.addEventListener('click', () => {
+            elements.photoUpload.click();
+        });
+
+        elements.photoUpload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    elements.photoPreview.src = e.target.result;
+                    elements.photoPreview.classList.remove('hidden');
+                    elements.photoPlaceholder.classList.add('hidden');
+                    elements.photoContainer.classList.remove('border-dashed', 'border-blue-300', 'bg-blue-50');
+                    elements.photoContainer.classList.add('border-transparent');
+                    state.photoLoaded = true;
+                    updateSentence();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 選擇按鈕邏輯
+        elements.optionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const type = btn.getAttribute('data-type');
+                const text = btn.getAttribute('data-text');
+
+                // 清除同類別的其他按鈕選取狀態
+                document.querySelectorAll(`.option-btn[data-type="${type}"]`).forEach(b => {
+                    b.classList.remove(type === 'sight' ? 'selected-ring-green' : 'selected-ring-pink');
+                });
+
+                // 設定當前選取狀態
+                btn.classList.add(type === 'sight' ? 'selected-ring-green' : 'selected-ring-pink');
+                
+                // 更新狀態
+                state[type] = text;
+                updateSentence();
+            });
+        });
+
+        // 更新下方句子顯示
+        function updateSentence() {
+            if (!state.photoLoaded && !state.sight && !state.feeling) {
+                elements.sentenceDisplay.innerHTML = '<span class="text-gray-400">請選圖案，我就會幫你把句子變出來喔！✨</span>';
+                return;
+            }
+
+            let html = '這次的戶外教育，';
+            if (state.sight) {
+                html += `<span class="text-green-600 underline decoration-wavy decoration-green-300">我看到了${state.sight}</span>`;
+            }
+            if (state.sight && state.feeling) {
+                html += '，';
+            }
+            if (state.feeling) {
+                html += `<span class="text-pink-600 underline decoration-wavy decoration-pink-300">我覺得${state.feeling}</span>`;
+            }
+            html += '。';
+
+            elements.sentenceDisplay.innerHTML = html;
+        }
+
+        // 唸出句子功能 (Web Speech API)
+        elements.btnSpeak.addEventListener('click', () => {
+            let textToSpeak = '';
+
+            if (!state.photoLoaded && !state.sight && !state.feeling) {
+                textToSpeak = '請先選一張照片，然後告訴我你看到了什麼！';
+            } else {
+                textToSpeak = '這次的戶外教育，';
+                if (state.sight) textToSpeak += `我看到了${state.sight}，`;
+                if (state.feeling) textToSpeak += `我覺得${state.feeling}。`;
+                if (!state.sight && !state.feeling) textToSpeak += '這是我拍的照片。';
+            }
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // 停止先前的語音
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.85; // 語速稍微放慢
+                utterance.pitch = 1.2; // 音調微高
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('您的瀏覽器不支援語音功能喔！');
+            }
+        });
+
+        // 重新開始功能
+        function resetApp() {
+            state.photoLoaded = false;
+            state.sight = null;
+            state.feeling = null;
+            
+            // 重置照片
+            elements.photoPreview.src = '';
+            elements.photoPreview.classList.add('hidden');
+            elements.photoPlaceholder.classList.remove('hidden');
+            elements.photoContainer.classList.add('border-dashed', 'border-blue-300', 'bg-blue-50');
+            elements.photoContainer.classList.remove('border-transparent');
+            elements.photoUpload.value = '';
+
+            // 重置按鈕
+            elements.optionBtns.forEach(btn => {
+                btn.classList.remove('selected-ring-green', 'selected-ring-pink');
+            });
+
+            // 重置文字
+            updateSentence();
+        }
+
+        elements.btnResetDesktop.addEventListener('click', resetApp);
+        elements.btnResetMobile.addEventListener('click', resetApp);
+
+    </script>
+</body>
+</html>
