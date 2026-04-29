@@ -29,76 +29,64 @@
 
         <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <!-- 左側：照片區 -->
+            <!-- 左側：看到什麼 -->
             <div class="flex flex-col gap-4">
                 <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                    <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center">1</span>
-                    選一張照片吧！
+                    <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center">1</span>
+                    我看到什麼？ 👀
                 </h2>
-                
-                <input type="file" id="photo-upload" accept="image/*" class="hidden" />
-                
-                <div id="photo-container" class="border-4 border-dashed border-blue-300 bg-blue-50 hover:bg-blue-100 rounded-3xl h-64 md:h-80 flex flex-col items-center justify-center cursor-pointer transition-all relative overflow-hidden">
-                    <div id="photo-placeholder" class="flex flex-col items-center">
-                        <span class="text-6xl mb-4">📸</span>
-                        <p class="text-xl font-bold text-blue-600">點我放照片</p>
-                    </div>
-                    <img id="photo-preview" src="" alt="預覽照片" class="absolute inset-0 w-full h-full object-contain bg-gray-50 hidden" />
+                <div class="grid grid-cols-2 gap-3" id="sight-options">
+                    <button data-type="sight" data-text="一幅美麗的畫" class="option-btn bg-blue-100 hover:bg-blue-200 border-blue-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🖼️</span><span class="text-lg font-bold text-gray-700">一幅美麗的畫</span>
+                    </button>
+                    <button data-type="sight" data-text="酷酷的雕塑" class="option-btn bg-green-100 hover:bg-green-200 border-green-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🗿</span><span class="text-lg font-bold text-gray-700">酷酷的雕塑</span>
+                    </button>
+                    <button data-type="sight" data-text="高高的建築物" class="option-btn bg-purple-100 hover:bg-purple-200 border-purple-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🏛️</span><span class="text-lg font-bold text-gray-700">高高的建築物</span>
+                    </button>
+                    <button data-type="sight" data-text="好多人" class="option-btn bg-orange-100 hover:bg-orange-200 border-orange-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🧑‍🤝‍🧑</span><span class="text-lg font-bold text-gray-700">好多人</span>
+                    </button>
+                    <!-- 新增的選項 -->
+                    <button data-type="sight" data-text="漂亮的風景" class="option-btn bg-cyan-100 hover:bg-cyan-200 border-cyan-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🏞️</span><span class="text-lg font-bold text-gray-700">漂亮的風景</span>
+                    </button>
+                    <button data-type="sight" data-text="新奇的東西" class="option-btn bg-violet-100 hover:bg-violet-200 border-violet-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">✨</span><span class="text-lg font-bold text-gray-700">新奇的東西</span>
+                    </button>
                 </div>
-
-                <button id="btn-reset-mobile" class="md:hidden mt-2 bg-gray-100 text-gray-700 px-4 py-3 rounded-xl font-bold border-2 border-gray-200">
-                    🔄 換一張 / 重新開始
-                </button>
             </div>
 
-            <!-- 右側：選擇與表達區 -->
-            <div class="flex flex-col gap-8">
-                
-                <!-- 看到什麼 -->
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center">2</span>
-                        我看到什麼？ 👀
-                    </h2>
-                    <div class="grid grid-cols-2 gap-3" id="sight-options">
-                        <button data-type="sight" data-text="一幅美麗的畫" class="option-btn bg-blue-100 hover:bg-blue-200 border-blue-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">🖼️</span><span class="text-lg font-bold text-gray-700">一幅美麗的畫</span>
-                        </button>
-                        <button data-type="sight" data-text="酷酷的雕塑" class="option-btn bg-green-100 hover:bg-green-200 border-green-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">🗿</span><span class="text-lg font-bold text-gray-700">酷酷的雕塑</span>
-                        </button>
-                        <button data-type="sight" data-text="高高的建築物" class="option-btn bg-purple-100 hover:bg-purple-200 border-purple-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">🏛️</span><span class="text-lg font-bold text-gray-700">高高的建築物</span>
-                        </button>
-                        <button data-type="sight" data-text="好多人" class="option-btn bg-orange-100 hover:bg-orange-200 border-orange-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">🧑‍🤝‍🧑</span><span class="text-lg font-bold text-gray-700">好多人</span>
-                        </button>
-                    </div>
+            <!-- 右側：感覺怎麼樣 -->
+            <div class="flex flex-col gap-4">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <span class="bg-pink-500 text-white rounded-full w-8 h-8 flex items-center justify-center">2</span>
+                    我覺得怎麼樣？ ❤️
+                </h2>
+                <div class="grid grid-cols-2 gap-3" id="feeling-options">
+                    <button data-type="feeling" data-text="很開心" class="option-btn bg-yellow-100 hover:bg-yellow-200 border-yellow-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">😊</span><span class="text-lg font-bold text-gray-700">很開心</span>
+                    </button>
+                    <button data-type="feeling" data-text="很驚訝" class="option-btn bg-indigo-100 hover:bg-indigo-200 border-indigo-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">😲</span><span class="text-lg font-bold text-gray-700">很驚訝</span>
+                    </button>
+                    <button data-type="feeling" data-text="很好玩" class="option-btn bg-pink-100 hover:bg-pink-200 border-pink-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🥳</span><span class="text-lg font-bold text-gray-700">很好玩</span>
+                    </button>
+                    <button data-type="feeling" data-text="累累的" class="option-btn bg-gray-100 hover:bg-gray-200 border-gray-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🥱</span><span class="text-lg font-bold text-gray-700">累累的</span>
+                    </button>
+                    <!-- 新增的選項 -->
+                    <button data-type="feeling" data-text="肚子餓" class="option-btn bg-orange-100 hover:bg-orange-200 border-orange-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🤤</span><span class="text-lg font-bold text-gray-700">肚子餓</span>
+                    </button>
+                    <button data-type="feeling" data-text="有點熱" class="option-btn bg-red-100 hover:bg-red-200 border-red-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
+                        <span class="text-4xl">🥵</span><span class="text-lg font-bold text-gray-700">有點熱</span>
+                    </button>
                 </div>
-
-                <!-- 感覺怎麼樣 -->
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <span class="bg-pink-500 text-white rounded-full w-8 h-8 flex items-center justify-center">3</span>
-                        我覺得怎麼樣？ ❤️
-                    </h2>
-                    <div class="grid grid-cols-2 gap-3" id="feeling-options">
-                        <button data-type="feeling" data-text="很開心" class="option-btn bg-yellow-100 hover:bg-yellow-200 border-yellow-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">😊</span><span class="text-lg font-bold text-gray-700">很開心</span>
-                        </button>
-                        <button data-type="feeling" data-text="很驚訝" class="option-btn bg-indigo-100 hover:bg-indigo-200 border-indigo-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">😲</span><span class="text-lg font-bold text-gray-700">很驚訝</span>
-                        </button>
-                        <button data-type="feeling" data-text="很好玩" class="option-btn bg-pink-100 hover:bg-pink-200 border-pink-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">🥳</span><span class="text-lg font-bold text-gray-700">很好玩</span>
-                        </button>
-                        <button data-type="feeling" data-text="累累的" class="option-btn bg-gray-100 hover:bg-gray-200 border-gray-300 p-4 rounded-2xl border-4 transition-all flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">🥱</span><span class="text-lg font-bold text-gray-700">累累的</span>
-                        </button>
-                    </div>
-                </div>
-
             </div>
+
         </div>
 
         <!-- 底部：唸出來區塊 -->
@@ -120,45 +108,17 @@
     <script>
         // 狀態變數
         let state = {
-            photoLoaded: false,
             sight: null,
             feeling: null
         };
 
         // DOM 元素
         const elements = {
-            photoUpload: document.getElementById('photo-upload'),
-            photoContainer: document.getElementById('photo-container'),
-            photoPlaceholder: document.getElementById('photo-placeholder'),
-            photoPreview: document.getElementById('photo-preview'),
             sentenceDisplay: document.getElementById('sentence-display'),
             btnSpeak: document.getElementById('btn-speak'),
             btnResetDesktop: document.getElementById('btn-reset-desktop'),
-            btnResetMobile: document.getElementById('btn-reset-mobile'),
             optionBtns: document.querySelectorAll('.option-btn')
         };
-
-        // 照片上傳邏輯
-        elements.photoContainer.addEventListener('click', () => {
-            elements.photoUpload.click();
-        });
-
-        elements.photoUpload.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    elements.photoPreview.src = e.target.result;
-                    elements.photoPreview.classList.remove('hidden');
-                    elements.photoPlaceholder.classList.add('hidden');
-                    elements.photoContainer.classList.remove('border-dashed', 'border-blue-300', 'bg-blue-50');
-                    elements.photoContainer.classList.add('border-transparent');
-                    state.photoLoaded = true;
-                    updateSentence();
-                };
-                reader.readAsDataURL(file);
-            }
-        });
 
         // 選擇按鈕邏輯
         elements.optionBtns.forEach(btn => {
@@ -182,7 +142,7 @@
 
         // 更新下方句子顯示
         function updateSentence() {
-            if (!state.photoLoaded && !state.sight && !state.feeling) {
+            if (!state.sight && !state.feeling) {
                 elements.sentenceDisplay.innerHTML = '<span class="text-gray-400">請選圖案，我就會幫你把句子變出來喔！✨</span>';
                 return;
             }
@@ -206,13 +166,12 @@
         elements.btnSpeak.addEventListener('click', () => {
             let textToSpeak = '';
 
-            if (!state.photoLoaded && !state.sight && !state.feeling) {
-                textToSpeak = '請先選一張照片，然後告訴我你看到了什麼！';
+            if (!state.sight && !state.feeling) {
+                textToSpeak = '請先選圖案，然後告訴我你的想法！';
             } else {
                 textToSpeak = '這次的戶外教育，';
                 if (state.sight) textToSpeak += `我看到了${state.sight}，`;
                 if (state.feeling) textToSpeak += `我覺得${state.feeling}。`;
-                if (!state.sight && !state.feeling) textToSpeak += '這是我拍的照片。';
             }
 
             if ('speechSynthesis' in window) {
@@ -229,17 +188,8 @@
 
         // 重新開始功能
         function resetApp() {
-            state.photoLoaded = false;
             state.sight = null;
             state.feeling = null;
-            
-            // 重置照片
-            elements.photoPreview.src = '';
-            elements.photoPreview.classList.add('hidden');
-            elements.photoPlaceholder.classList.remove('hidden');
-            elements.photoContainer.classList.add('border-dashed', 'border-blue-300', 'bg-blue-50');
-            elements.photoContainer.classList.remove('border-transparent');
-            elements.photoUpload.value = '';
 
             // 重置按鈕
             elements.optionBtns.forEach(btn => {
@@ -251,7 +201,6 @@
         }
 
         elements.btnResetDesktop.addEventListener('click', resetApp);
-        elements.btnResetMobile.addEventListener('click', resetApp);
 
     </script>
 </body>
